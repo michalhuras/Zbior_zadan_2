@@ -30,13 +30,13 @@ struct wezel
 int wartosc;           //wartosc przechowywana w wezle
 struct wezel *nastepny;  //wskaznik na nastepny element
 };
-struct wezel *info; //wska�nik na info
+struct wezel *info; //wskaŸnik na info
 
 int dodawanie(int n, struct wezel *start)
 {//funkcja do zadania 4.2.5
     if (info == NULL)
     {
-        //inicjalizacja g�owy
+        //inicjalizacja g³owy
         info = (wezel*)malloc(sizeof *info);
         info->wartosc = NULL;
         info->nastepny = NULL;
@@ -102,33 +102,115 @@ int odejmowanie(int n,struct wezel *start)
     else  return 0;
 }
 
-double* przepisywanie1(int n,int a[],int b[],double c[])
+int pierwsza(int n)
+{//funkcja do zadania 4.2.5-rozwiazanie z kiazki
+    int pom;
+    bool * sito=new bool[n];
+    for (int i=0;i<n;i++)
+        sito[i]=true;
+    for (int i=2;i<n;i++)
+    if (sito[i]){
+        pom=i;
+        for(j=2*i;j<n;j+=i)
+            sito[j]=false;
+    }
+    delete []sito;
+    return pom;
+}
+
+void przepisywanie1(int n,int* wska,int* wskb,double* wskc)
 {
 
     int j;
     for (j=0;j<n;j++)
     {
-        c[j]= a[j];
+        wskc[j]= wska[j];
     }
     for (j=0;j<n;j++)
     {
-        c[j+n]= a[n];
+        wskc[j+n]= wskb[j];
     }
-    double *wsk1;
-    wsk1=&c[0];
-    return wsk1;
 }
+
+void przepisywanie2(int n,int* wska,int* wskb,double* wskc)
+{
+
+    int j;
+    for (j=0;j<n*2;j++)
+    {
+        if (j%2==0) wskc[j]= wska[j/2];
+        else  wskc[j]= wskb[j/2];
+    }
+
+}
+
+void funkcja(int n,int* w_tab)
+{
+    int maks,mini,indeks_maks=0,indeks_min=0,maks_m,indeks_maks_m=0;
+    maks=w_tab[0];
+    mini=w_tab[0];
+    maks_m=w_tab[0];
+    for (int i=1;i<n;i++)
+    {
+        if (w_tab[i]>maks)
+        {maks=w_tab[i];
+        indeks_maks=i;}
+        if (w_tab[i]<mini)
+        {mini=w_tab[i];
+        indeks_min=i;}
+        if (abs(w_tab[i])>abs(maks_m))
+        {maks_m=w_tab[i];
+        indeks_maks_m=i;}
+    }
+
+    cout<<"a) Największą wartość przechowywaną w tablicy tab:  "<<maks<<endl;
+    cout<<"b) Najmniejsza wartość przechowywaną w tablicy tab:  "<<mini<<endl;
+    cout<<"c) Indeks elementu o największej wartości:  "<<indeks_maks+1<<endl;
+    cout<<"d) Indeks elementu o najmniejszej wartości:  "<<indeks_min+1<<endl;
+    cout<<"e) Największą wartość bezwzględna w tablicy tab:  "<<maks_m<<endl;
+    cout<<"d) Indeks największej wartości bezwzględnej:  "<<indeks_maks_m+1<<endl;
+
+}
+
+int* tworz_tablice(int n)
+{
+     int * liczba;
+     liczba = new int[n];
+     return liczba;
+}
+
+int* usun_zera(int n,int *wsk3)
+{ //funkcja do zadania 4.2.19
+    int suma=0,j=0,i=0;
+    cout <<endl<<wsk3[2]<<endl;
+    for (j=0;j<n;j++)
+    {
+        if (wsk3[j]==0) suma++;
+    }
+    int* wsk4;
+    wsk4= new int[n-suma];
+    for (j=0;j<n;j++)
+    {
+    if (wsk3[j]!=0)
+    {wsk4[i]=wsk3[j];
+    i++;
+    }
+    }
+
+    return wsk4;
+}
+
 int main()
 {
 
     //ZADANIE 4.2.2
     /*
-    //Napisz funkcj�, kt�ra otrzymuje dwa argumenty: dodatni� liczb� ca�kowit�
-    //n oraz n-elementow� tablic� tab o elementach typu int i zwraca
-    //jako warto��:
-    //a) (r) �redni� arytmetyczn� element�w tablicy tab.
-    //b) sum� element�w tablicy tab,
-    //c) sum� kwadrat�w element�w tablicy tab.
+    //Napisz funkcjê, która otrzymuje dwa argumenty: dodatni¹ liczbê ca³kowit¹
+    //n oraz n-elementow¹ tablicê tab o elementach typu int i zwraca
+    //jako wartoœæ:
+    //a) (r) œredni¹ arytmetyczn¹ elementów tablicy tab.
+    //b) sumê elementów tablicy tab,
+    //c) sumê kwadratów elementów tablicy tab.
     int n;
     cout<<"Podaj wielkosc tablicy"<<endl;
     cin >> n;
@@ -149,9 +231,9 @@ int main()
 
     //ZADANIE 4.2.5
     /*
-    //Napisz funkcj�, kt�ra otrzymuje jako argument liczb� ca�kowit�
-    //n (n > 3) i zwraca jako warto�� najwi�ksz� liczb� pierwsz�
-    //mniejsz� od n (do wyznaczenia wyniku u�yj algorytmu sita Eratostenesa).
+    //Napisz funkcjê, która otrzymuje jako argument liczbê ca³kowit¹
+    //n (n > 3) i zwraca jako wartoœæ najwiêksz¹ liczbê pierwsz¹
+    //mniejsz¹ od n (do wyznaczenia wyniku u¿yj algorytmu sita Eratostenesa).
     int n;
     cout<<"Wprowadz liczbe naturalna wiekza od 3"<<endl;
     cin >>n;
@@ -161,9 +243,9 @@ int main()
         dodawanie(i,info);
     }
 
-    cout<<"Wszystkie liczby z tego przedzia�u: "<<endl;
+    cout<<"Wszystkie liczby z tego przedzia³u: "<<endl;
 
-    //usuwanie liczb, kt�re nie sa pierwsze
+    //usuwanie liczb, które nie sa pierwsze
      wyswietl_liste(info->nastepny);
 
     struct wezel* a;
@@ -179,22 +261,23 @@ int main()
         a=wskaznik(a);
         i=wartosc(a);
     }
-    cout<<"\n Liczby pierwsze z tego przedzia�u: "<<endl;
+    cout<<"\n Liczby pierwsze z tego przedzia³u: "<<endl;
     wyswietl_liste(info->nastepny);
     free (info);
     */
 
     //ZADANIE 4.2.8
-    //Napisz funkcj�, kt�ra otrzymuje cztery argumenty: dodatni� liczb�
-    //ca�kowit� n, n-elementowe tablice tab1 i tab2 oraz 2 � n-elementow�
-    //tablic� tab3 o elementach typu double.
-    //a) Funkcja powinna przepisywa� zawarto�� tablic tab1 i tab2 do tablicy
-    //tab3 w taki spos�b, �e na pocz�tku tablicy tab3 powinny si�
-    //znale�� elementy tablicy tab1, a po nich elementy tablicy tab2.
-    //b) Funkcja powinna przepisywa� zawarto�� tablic tab1 i tab2 do tablicy
-    //tab3 w taki spos�b, �e w kom�rkach tablicy tab3 o nieparzystych
-    //indeksach powinny si� znale�� elementy tablicy tab1,
-    // a w kom�rkach tablicy tab3 o parzystych indeksach elementy tablicy tab2.
+    /*
+    //Napisz funkcjê, która otrzymuje cztery argumenty: dodatni¹ liczbê
+    //ca³kowit¹ n, n-elementowe tablice tab1 i tab2 oraz 2 · n-elementow¹
+    //tablicê tab3 o elementach typu double.
+    //a) Funkcja powinna przepisywaæ zawartoœæ tablic tab1 i tab2 do tablicy
+    //tab3 w taki sposób, ¿e na pocz¹tku tablicy tab3 powinny siê
+    //znaleŸæ elementy tablicy tab1, a po nich elementy tablicy tab2.
+    //b) Funkcja powinna przepisywaæ zawartoœæ tablic tab1 i tab2 do tablicy
+    //tab3 w taki sposób, ¿e w komórkach tablicy tab3 o nieparzystych
+    //indeksach powinny siê znaleŸæ elementy tablicy tab1,
+    // a w komórkach tablicy tab3 o parzystych indeksach elementy tablicy tab2.
 
     int n,i;
     cout<<"Podaj wartosc parametru n"<<endl;
@@ -211,19 +294,104 @@ int main()
     {
         cout <<a[i]<<"   ";
     }
-    cout <<endl<<"Tablica C: "<<endl;
-
-    //a
-    double* wsk;
-    wsk=&c[0];
-    przepisywanie1(n,a[n],b[n],c[n]);
     for (i=0;i<n;i++)
     {
-        cout <<*wsk<<"   ";
-        wsk++;
+        cout <<b[i]<<"   ";
+    }
+    cout <<endl<<"Tablica C: "<<endl;
+    //a
+    double* wsk1;
+    wsk1=&c[0];
+    int *wska; int* wskb;
+    wska=&a[0];
+    wskb=&b[0];
+    przepisywanie1(n,wska,wskb,wsk1);
+    for (i=0;i<2*n;i++)
+    {
+        cout <<*wsk1<<"   ";
+        wsk1++;
     }
     //b
-    //przepisywanie2(n,a[n],b[n],c[n]);
+    cout<<endl;
+    double* wsk2;
+    wsk2=&c[0];
+    przepisywanie2(n,wska,wskb,wsk2);
+    for (i=0;i<2*n;i++)
+    {
+        cout <<*wsk2<<"   ";
+        wsk2++;
+    }
+    */
+
+    //ZADANIE 4.2.10
+    /*
+    //Napisz funkcję, która otrzymuje dwa argumenty: dodatnią liczbę całkowitą
+    //n oraz n-elementową tablicę tab o elementach typu int i:
+    //a) (r,!) zwraca największą wartość przechowywaną w tablicy tab,
+    //b) zwraca najmniejszą wartość przechowywaną w tablicy tab,
+    //c) (r,!) zwraca indeks elementu tablicy tab o największej wartości,
+    //d) zwraca indeks elementu tablicy tab o najmniejszej wartości,
+    //e) zwraca największą spośród wartości bezwzględnych elementów przechowywanych
+    //w tablicy tab,
+    //f) zwraca indeks elementu tablicy tab o największej wartości bezwzględnej.
+    int n;
+    cout <<"Podaj wartosc n"<<endl;
+    cin >>n;
+    int tab[n];
+    srand(time(NULL));
+    cout<<"Tablica:"<<endl;
+    for (int i=0;i<n;i++)
+    {
+        tab[i]=rand()%100+1;
+        cout<<tab[i]<<"   ";
+    }
+    cout<<endl;
+    int* w_tab;
+    w_tab=&tab[0];
+    funkcja(n,w_tab);
+    */
+
+    //ZADANIE 4.2.13
+    /*
+    //Napisz funkcję, która otrzymuje jako argument dodatnią liczbę
+    //całkowitą n, a następnie tworzy dynamiczną n-elementową tablicę
+    //o elementach typu int i zwraca jako wartość wskaźnik do jej pierwszego
+    //elementu.
+    int n;
+    cout <<"Podaj wartosc n"<<endl;
+    cin >>n;
+    int *wskaznik;
+    wskaznik=tworz_tablice(n);
+    delete[] wskaznik;
+    */
+
+    // ZADANIE 4.2.19
+    /*
+    //Napisz funkcję, która dostaje w argumentach dodatnią liczbę całkowitą
+    //n oraz n-elementową tablicę liczb całkowitych tab1 o elementach
+    //typu int i przepisuje do nowo utworzonej tablicy tab2 elementy
+    //tablicy tab1 o wartości różnej od zera. Rozmiar tablicy tab2 powinien
+    //być równy liczbie niezerowych elementów tablicy tab1. Jako wartość
+    //funkcja powinna zwrócić wskaźnik na pierwszy element tablicy tab2.
+    int n,i,a;
+    cout <<"Podaj wartosc n, a nastepnie kolejne liczby tablicy"<<endl;
+    cin>>n;
+    int tab1[n];
+    for (i=0;i<n;i++)
+    {cin >>tab1[i];
+    }
+    cout <<"tablica pierwotna: "<<endl;
+    for (i=0;i<n;i++)
+    {cout <<tab1[i]<<"    ";
+    }
+    cout <<"tablica po zmianach: "<<endl;
+    int* wsk3,*wsk4;
+    wsk3=&tab1[0];
+    wsk4=usun_zera(n,wsk3);
+    for (i=0;i<n;i++)
+    {cout <<wsk4[i]<<"    ";
+    }
+    */
 
     return 0;
 
