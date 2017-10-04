@@ -1,11 +1,11 @@
-#include <iostream>
+﻿#include <iostream>
 #include <time.h>
 #include <cstdlib>
 #include <math.h>
 
 using namespace std;
 
-struct trojkat{//struktura do zadania 7.2.1
+struct trojkat{//struktura do zadania 7.2.1  
 int a,b,c;
 };
 
@@ -219,7 +219,7 @@ int main()
     // ZADANIE 7.2.3
     /*
     //Zdefiniuj strukturê punkt s³u¿¹c¹ do przechowywania wspó³rzêdnych
-    //punktów w trójwymiarowej przestrzeni kartezjañskiej.
+    //  punktów w trójwymiarowej przestrzeni kartezjañskiej.
     //Napisz funkcjê, która otrzymuje jako argumenty tablicê tab o argumentach
     //typu struct punkt oraz jej rozmiar, i zwraca jako wartoœæ
     //najmniejsz¹ spoœród odleg³oœci pomiêdzy punktami przechowywanymi
