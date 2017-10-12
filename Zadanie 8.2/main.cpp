@@ -44,7 +44,7 @@ void wypisz(char * sciezka)
     {
         plik>>c;
         if (!plik.eof())
-            cout<<c;
+            cout<<c<<"  ";
     }
     plik.close();
 }
@@ -187,6 +187,7 @@ int main()
     wypisz(plik);
     */
 
+
     //ZADANIE 8.2.4
     /*
     //Napisz funkcjê, która dostaje jako argumenty œcie¿kê dostêpu
@@ -199,7 +200,7 @@ int main()
     */
 
     //ZADANIE 8.2.5
-    /*
+    /*   
     //Napisz funkcjê, która dostaje w argumencie œcie¿kê dostêpu do pliku
     //tekstowego i wypisuje na standardowym wyjœciu statystyki wystêpowania
     //w pliku poszczególnych znaków (zak³adamy, ¿e znaki s¹ typu
@@ -209,12 +210,13 @@ int main()
     */
 
     //ZADANIE 8.2.6
+    /*
     //Napisz funkcjê, która dostaje jako argument œcie¿kê dostêpu do pliku
     //tekstowego zawieraj¹cego liczby ca³kowite oddzielone bia³ymi znakami
     //i zwraca jako wartoœæ sumê znajduj¹cych siê w pliku liczb.
     char* plik="suma.txt";
     suma(plik);
-
+    */
 
 
 
