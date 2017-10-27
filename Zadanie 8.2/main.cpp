@@ -8,7 +8,7 @@ using namespace std;
 fstream *otworz(char* plik)
 { //funkcja do zadania 8.2.1
     return new fstream(plik,ios::in);
-    //to samo co plik.open("wizytowka.txt",ios::in);, tylko zwraca wskaŸnik
+    //to samo co plik.open("wizytowka.txt",ios::in);, tylko zwraca wskaÅºnik
 }
 
 void wypisz(fstream &plik)
@@ -50,7 +50,7 @@ void wypisz(char * sciezka)
 }
 
 void wypisz2(char * sciezka)
-{//funkcja do zadania 8.2.3
+{//funkcja do zadania  8.2.3
     wfstream plik(sciezka, ios::in);
     wchar_t c;
     while(!plik.eof())
@@ -154,20 +154,20 @@ int main()
 {
     //ZADANIE 8.2.1
     /*
-    //Napisz funkcjê, która dostaje jako argument œcie¿kê dostêpu
-    //do pliku, otwiera plik do tekstowego czytania i zwraca jako wartoœæ
-    //deskryptor œwie¿o otwartego pliku (w wersji dla jêzyka C++ funkcja
-    //powinna zwróciæ wskaŸnik do obiektu klasy fstream).
+    //Napisz funkcjÄ™, ktÃ³ra dostaje jako argument Å›cieÅ¼kÄ™ dostÄ™pu
+    //do pliku, otwiera plik do tekstowego czytania i zwraca jako wartoÅ›Ä‡
+    //deskryptor Å›wieÅ¼o otwartego pliku (w wersji dla jÄ™zyka C++ funkcja
+    //powinna zwrÃ³ciÄ‡ wskaÅºnik do obiektu klasy fstream).
     char* plik="Wizytowka.txt";
     fstream *wsk=otworz(plik);
     */
 
     //ZADANIE 8.2.2
     /*
-    //Napisz funkcjê, która dostaje jako argument deskryptor do pliku
-    //tekstowego otwartego do czytania (w wersji dla jêzyka C++ referencjê
-    //do obiektu klasy fstream), wypisuje zawartoœæ pliku na standardowe
-    //wyjœcie i zamyka plik.
+    //Napisz funkcjÄ™, ktÃ³ra dostaje jako argument deskryptor do pliku
+    //tekstowego otwartego do czytania (w wersji dla jÄ™zyka C++ referencjÄ™
+    //do obiektu klasy fstream), wypisuje zawartoÅ›Ä‡ pliku na standardowe
+    //wyjÅ›cie i zamyka plik.
     char* plik="wizytowka.txt";
     fstream *wsk=otworz(plik);
     //wsk-wskaznik do obiektu klasy fstream
@@ -179,10 +179,10 @@ int main()
 
     //ZADANIE 8.2.3
     /*
-    //Napisz funkcjê, która dostaje jako argument œcie¿kê dostêpu
-    //do pliku tekstowego i wypisuje na standardowym wyjœciu zawartoœæ
-    //pliku z pominiêciem bia³ych znaków.
-    //Napisz dwie wersje funkcji dla znaków typów char i wchar_t.
+    //Napisz funkcjÄ™, ktÃ³ra dostaje jako argument Å›cieÅ¼kÄ™ dostÄ™pu
+    //do pliku tekstowego i wypisuje na standardowym wyjÅ›ciu zawartoÅ›Ä‡
+    //pliku z pominiÄ™ciem biaÅ‚ych znakÃ³w.
+    //Napisz dwie wersje funkcji dla znakÃ³w typÃ³w char i wchar_t.
     char* plik="wizytowka.txt";
     wypisz(plik);
     */
@@ -190,10 +190,10 @@ int main()
 
     //ZADANIE 8.2.4
     /*
-    //Napisz funkcjê, która dostaje jako argumenty œcie¿kê dostêpu
-    //do pliku tekstowego oraz znak c i zwraca jako wartoœæ liczbê wyst¹pieñ
+    //Napisz funkcjÄ™, ktÃ³ra dostaje jako argumenty Å›cieÅ¼kÄ™ dostÄ™pu
+    //do pliku tekstowego oraz znak c i zwraca jako wartoÅ›Ä‡ liczbÄ™ wystÄ…pieÅ„
     //znaku c w podanym w argumencie pliku.
-    //Napisz dwie wersje funkcji dla znaków typów char i wchar_t.
+    //Napisz dwie wersje funkcji dla znakÃ³w typÃ³w char i wchar_t.
     char* plik="wizytowka.txt";
     char c='a';
     znak(plik,c);
@@ -201,9 +201,9 @@ int main()
 
     //ZADANIE 8.2.5
     /*   
-    //Napisz funkcjê, która dostaje w argumencie œcie¿kê dostêpu do pliku
-    //tekstowego i wypisuje na standardowym wyjœciu statystyki wystêpowania
-    //w pliku poszczególnych znaków (zak³adamy, ¿e znaki s¹ typu
+    //Napisz funkcjÄ™, ktÃ³ra dostaje w argumencie Å›cieÅ¼kÄ™ dostÄ™pu do pliku
+    //tekstowego i wypisuje na standardowym wyjÅ›ciu statystyki wystÄ™powania
+    //w pliku poszczegÃ³lnych znakÃ³w (zakÅ‚adamy, Å¼e znaki sÄ… typu
     //char).
     char* plik="wizytowka.txt";
     statystyki(plik);
@@ -211,9 +211,9 @@ int main()
 
     //ZADANIE 8.2.6
     /*
-    //Napisz funkcjê, która dostaje jako argument œcie¿kê dostêpu do pliku
-    //tekstowego zawieraj¹cego liczby ca³kowite oddzielone bia³ymi znakami
-    //i zwraca jako wartoœæ sumê znajduj¹cych siê w pliku liczb.
+    //Napisz funkcjÄ™, ktÃ³ra dostaje jako argument Å›cieÅ¼kÄ™ dostÄ™pu do pliku
+    //tekstowego zawierajÄ…cego liczby caÅ‚kowite oddzielone biaÅ‚ymi znakami
+    //i zwraca jako wartoÅ›Ä‡ sumÄ™ znajdujÄ…cych siÄ™ w pliku liczb.
     char* plik="suma.txt";
     suma(plik);
     */
