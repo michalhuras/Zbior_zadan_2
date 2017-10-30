@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1509358244 source:c:\users\u¿ytkownik\desktop\kursy\c++\zbiory zadan\zbior_zadan_2\zadanie 7.3_gamma\main.cpp
+	<iostream>
+	<list>
+	<algorithm>
+	<math.h>
+

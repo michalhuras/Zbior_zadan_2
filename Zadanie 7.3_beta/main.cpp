@@ -21,11 +21,8 @@ void losuj(element* wsk)
     element* wsk2=wsk;
     while (wsk!=NULL)
         {
-        cout<<"kupa";
         wsk=wsk->next;
         }
-
-        cout<<"kupa";
     wsk=new element;
     wsk->i=rand()%10+1;
     wsk->next=NULL;
