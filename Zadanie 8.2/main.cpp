@@ -96,14 +96,14 @@ void statystyki(char * sciezka)
     cout<<napis<<endl<<dlugosc<<endl<<endl;
 
     int tab[dlugosc][2];
-    for(int s=0;s<dlugosc;s++)
+    for(unsigned s=0;s<dlugosc;s++)
     {
         tab[s][0]=0;
     }
 
     unsigned licznik=0;
     cout<<licznik;
-    for(int i=0;i<dlugosc;i++)
+    for(unsigned i=0;i<dlugosc;i++)
     {
         for (int j=0;j<=i;j++)
         {
@@ -138,15 +138,105 @@ void suma(char * sciezka)
     while(!plik.eof())
     {
         plik>>c;
-        cout<<c<<endl;
-        a=atoi(c.c_str());
-        cout<<a<<endl;
-        //if (!plik.eof())
-            //sumaa=suma+a;
-
+        if (!plik.eof())
+            {
+            cout<<c<<endl;
+            a=atoi(c.c_str());
+            sumaa=sumaa+a;
+            }
     }
     cout<<endl<<sumaa;
     plik.close();
+}
+
+bool porownajZawartosc(char * sciezka1,char * sciezka2)
+{//funkcja do zadania 8.2.9
+    fstream plik1(sciezka1, ios::in);
+    fstream plik2(sciezka2, ios::in);
+    string znak1,znak2;
+    while(!plik1.eof()&& !plik2.eof())
+    {
+        plik1>>znak1;
+        plik2>>znak2;
+        if (!plik1.eof()&& !plik2.eof())
+            {
+            cout<<"Porownanie znakow:"<<endl;
+            cout<<znak1<<"   "<<znak2;
+            if (znak1!=znak2)
+                return false;
+            }
+          cout<<endl;
+    }
+    cout<<endl;
+    return true;
+    plik1.close();
+    plik2.close();
+}
+
+bool porownajZawartoscZbialymiznakami(char * sciezka1,char * sciezka2)
+{//funkcja do zadania 8.2.10
+    fstream plik1(sciezka1, ios::in);
+    fstream plik2(sciezka2, ios::in);
+    string znak1,znak2;
+    while(!plik1.eof()&& !plik2.eof())
+    {
+        getline(plik1,znak1);
+        getline(plik2,znak2);
+            cout<<"Porownanie lini:"<<endl;
+            cout<<znak1<<"   "<<znak2;
+            if (znak1!=znak2)
+                return false;
+          cout<<endl;
+    }
+    cout<<endl;
+    return true;
+    plik1.close();
+    plik2.close();
+}
+
+fstream *  wskaznikDoNadpisaniaPlikutekstowego (char * plik )
+{//funkcja do zadania 8.2.11
+return new fstream ( plik , ios::out | ios::app |ios::in) ;
+}
+
+void zapisWersowDopliku(fstream* plik1,int iloscWersow)
+{//funkcja do zadania 8.2.12
+    string liniaTekstu;
+    cin.sync();
+    for(int i=0;i<iloscWersow;i++)
+    {
+    getline(cin,liniaTekstu);
+    *plik1<<liniaTekstu<<endl;
+    }
+    plik1->close();
+}
+
+void przepiszZawartosc(fstream* plik1,fstream* plik2)
+{//funkcja do zadania 8.2.13
+    string liniaTekstu;
+    while(!plik1->eof())
+    {
+        getline(*plik1,liniaTekstu);
+        *plik2<<liniaTekstu<<endl;
+    }
+    plik1->close();
+    plik2->close();
+}
+
+void przepiszZawartoscBinarnie(char* sciezka1,char* sciezka2)
+{//funkcja do zadania 8.2.14
+    fstream * plik1=new fstream ( sciezka1 , ios::in  | ios::binary);
+    fstream * plik2=new fstream ( sciezka2 , ios::out | ios::binary) ;
+    char  c[100];
+    int n=100;
+    while(n==100)
+    {
+    plik1->read(c,100) ;
+    n=plik1->gcount() ;
+    plik2->write(c,n);
+    cout<<"kupa";
+    }
+
 }
 
 
@@ -200,7 +290,7 @@ int main()
     */
 
     //ZADANIE 8.2.5
-    /*   
+    /*
     //Napisz funkcję, która dostaje w argumencie ścieżkę dostępu do pliku
     //tekstowego i wypisuje na standardowym wyjściu statystyki występowania
     //w pliku poszczególnych znaków (zakładamy, że znaki są typu
@@ -209,7 +299,7 @@ int main()
     statystyki(plik);
     */
 
-    //ZADANIE 8.2.6
+    //ZADANIE 8.2.7
     /*
     //Napisz funkcję, która dostaje jako argument ścieżkę dostępu do pliku
     //tekstowego zawierającego liczby całkowite oddzielone białymi znakami
@@ -218,6 +308,88 @@ int main()
     suma(plik);
     */
 
+    //ZADANIE 8.2.9
+    /*
+    //Napisz funkcję, która dostaje jako argumenty ścieżki dostępu
+    //do dwóch plików tekstowych i zwraca jako wartość 1, jeżeli podane
+    //pliki mają taką samą zawartość oraz 0 w przeciwnym wypadku.
+    //Napisz dwie wersje funkcji dla znaków typu char i wchar_t.
+    char* sciezka1="porownanie1.txt";
+    char* sciezka2="porownanie2.txt";
+    char* sciezka3="porownanie3.txt";
+    if(porownajZawartosc(sciezka1,sciezka3)) cout <<"Pliki sa takie same"<<endl;
+    else cout<<endl<<"Pliki sie roznia"<<endl;
+    */
+
+    //ZADANIE 8.2.10
+    /*
+    //Napisz funkcję, która dostaje jako argumenty ścieżki dostępu
+    //do dwóch plików tekstowych i zwraca jako wartość 1, jeżeli podane
+    //pliki mają taką samą zawartość z dokładnością do białych znaków
+    //oraz 0 w przeciwnym wypadku.
+    //Napisz dwie wersje funkcji dla znaków typu char i wchar_t.
+    char* sciezka1="porownanie1.txt";
+    char* sciezka2="porownanie2.txt";
+    char* sciezka3="porownanie3.txt";
+    if(porownajZawartoscZbialymiznakami(sciezka1,sciezka2)) cout <<"Pliki sa takie same"<<endl;
+    else cout<<endl<<"Pliki sie roznia"<<endl;
+    */
+
+
+    //ZADANIE 8.2.11
+    /*
+    //Napisz funkcję, która dostaje jako argument ścieżkę dostępu do pliku,
+    //otwiera plik do tekstowego pisania z kursorem ustawionym na końcu
+    //pliku i zwraca jako wartość deskryptor świeżo otwartego pliku
+    //(w wersji dla języka C++ funkcja powinna zwrócić wskaźnik do obiektu
+    //klasy fstream).
+    char* sciezka1="nadpisywaniePliku.txt";
+    fstream * plik1=wskaznikDoNadpisaniaPlikutekstowego(sciezka1);
+    cout<<plik1<<endl;
+    */
+
+    //ZADANIE 8.2.12
+    /*
+    //Napisz funkcję, która dostaje jako argument deskryptor do pliku
+    //tekstowego otwartego do pisania (w wersji dla języka C++ referencję
+    //do obiektu klasy fstream) oraz liczbę n, wczytuje ze standardowego
+    //wejścia n wersów tekstu, zapisuje do pliku wczytany tekst i zamyka
+    //plik.Napisz dwie wersje funkcji dla znaków typów char i wchar_t.
+    char* sciezka1="nadpisywaniePliku.txt";
+    fstream * plik1=wskaznikDoNadpisaniaPlikutekstowego(sciezka1);
+    int iloscWersow;
+    cout<<"Podaj ile wersow ma zostac zapisanych do pliku:  ";
+    cin>>iloscWersow;
+    zapisWersowDopliku(plik1,iloscWersow);
+    */
+
+    //ZADANIE 8.2.13
+    /*
+    //Napisz funkcję, która dostaje jako argumenty deskryptory dwóch
+    //plików tekstowych i przepisuje zawartość pierwszego pliku do drugiego
+    //pliku.
+    char* sciezka1="zadanie8.2.13.A.txt";
+    char* sciezka2="zadanie8.2.13.B.txt";
+    fstream * plik1=new fstream ( sciezka1 , ios::in);
+    fstream * plik2=new fstream ( sciezka2 , ios::out | ios::app) ;
+    przepiszZawartosc(plik1,plik2);
+    */
+
+    //ZADANIE 8.2.14
+
+    //Napisz funkcję, która dostaje jako argumenty ścieżki dostępu
+    //do dwóch plików (w wersji dla języka C++ referencje do obiektów
+    //klasy fstream) i przepisuje zawartość pierwszego pliku do drugiego
+    //pliku (stara zawartość drugiego pliku ma zostać skasowana).
+    char* sciezka1="zadanie8.2.13.A.txt";
+    char* sciezka2="zadanie8.2.13.B.txt";
+    //fstream * plik1=new fstream ( sciezka1 , ios::in);
+    //fstream * plik2=new fstream ( sciezka2 , ios::out) ;
+    //przepiszZawartosc(plik1,plik2);
+    //wersja binarna
+    przepiszZawartoscBinarnie(sciezka1,sciezka2);
+
+    //ZADANIE 8.2.15
 
 
     return 0;
